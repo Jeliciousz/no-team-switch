@@ -11,12 +11,9 @@ public Plugin:myinfo =
 
 static ConVar g_cvNoTeamSwitchEnabled;
 
-ConVar cvJoinTeam;
-
 public OnPluginStart()
 {
-    g_cvNoTeamSwitchEnabled = CreateConVar("jz_noteamswitch_enabled", "true");
-    cvJoinTeam = FindConVar("jointeam");
+    g_cvNoTeamSwitchEnabled = CreateConVar("jz_noteamswitch_enabled", "1");
     AddCommandListener(BlockJoinTeam, "jointeam");
 
     PrintToServer("No Team Switch loaded!")
@@ -31,7 +28,5 @@ Action BlockJoinTeam(int client, const char[] command, int argc)
         return Plugin_Handled;
     }
 
-    SendConVarValue(client, cvJoinTeam, "");
-
-    return Plugin_Handled;
+    return Plugin_Continue;
 }
